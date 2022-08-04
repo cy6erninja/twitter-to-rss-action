@@ -1,0 +1,17 @@
+name: 'Twitter To Rss'
+description: 'Fetch latest tweets and render them to the repository as rss'
+inputs:
+  tweeter-id:
+    description: 'An id(not username) of an author of tweets to read.'
+    required: true
+  twitter-bearer: ${{secrets.tb}} 
+  output-filepath:
+    description: 'The full output filepath where to render the rss output.' 
+    required: true
+    default: '.github/workflow/rss/tweeter.rss'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{inputs.tweeter-id}}
+    - ${{inputs.output-filepath}}
